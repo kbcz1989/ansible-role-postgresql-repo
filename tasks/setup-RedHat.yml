@@ -1,0 +1,11 @@
+---
+- name: install postgres repo
+  yum:
+    name: '{{ postgres_rpm_repo_url }}'
+    state: present
+
+- name: import gpg key
+  rpm_key:
+    key: '{{ item }}'
+    state: present
+  with_items: '{{ postgres_repo_gpg_key_url }}'

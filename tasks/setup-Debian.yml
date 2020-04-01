@@ -1,0 +1,21 @@
+---
+- name: install postgresql key
+  apt_key:
+    url: '{{ item }}'
+    state: present
+  with_items: '{{ postgresql_apt_key }}'
+  when:
+    - postgresql_apt_key is defined
+    - postgresql_apt_key  != ''
+
+- name: add postgresql repositories
+  apt_repository:
+    repo: '{{ item }}'
+    state: present
+    update_cache: yes
+    filename: 'pgdg'
+  with_items: '{{ postgresql_apt_repo_url }}'
+  when:
+    - postgresql_apt_repo_url is defined
+    - postgresql_apt_repo_url|length
+
