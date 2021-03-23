@@ -1,11 +1,18 @@
 ---
-- name: install postgres repo
-  yum:
-    name: '{{ postgres_rpm_repo_url }}'
-    state: present
+- name: Check if postgres repo is already configured.
+  stat:
+    path: "{{ postgres_repofile_path }}"
+  register: postgres_repofile_result
 
 - name: import gpg key
   rpm_key:
     key: '{{ item }}'
     state: present
   with_items: '{{ postgres_repo_gpg_key_url }}'
+  when: not postgres_repofile_result.stat.exists
+
+- name: install postgres repo
+  yum:
+    name: '{{ postgres_rpm_repo_url }}'
+    state: present
+  when: not postgres_repofile_result.stat.exists
