@@ -1,5 +1,6 @@
 ---
 postgres_rpm_repo_url: 'https://download.postgresql.org/pub/repos/yum/reporpms/EL-{{ ansible_distribution_major_version }}-x86_64/pgdg-redhat-repo-latest.noarch.rpm'
 postgres_repo_gpg_key_url: 'https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG'
+postgres_repofile_path: '/etc/yum.repos.d/pgdg-redhat-all.repo'
 postgresql_apt_key: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
 postgresql_apt_repo_url: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
